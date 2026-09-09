@@ -1,3 +1,5 @@
+[English](README.en.md) | 中文
+
 # dsh-gpp
 
 DeepSeek Harness 游戏程序设计助手：把 Robert Nystrom《Game Programming Patterns》变成随手的本地检索工具。做游戏架构 / 系统设计决策时，用 `gpp_search` 以工程问题（中英文皆可）检索书中对应章节，并获得 19 个设计模式的中英双语元数据与 Unity C# 惯用法映射。
