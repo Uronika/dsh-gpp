@@ -1,0 +1,290 @@
+{
+  "patterns": {
+    "command": {
+      "en": "Command",
+      "zh": "命令模式",
+      "category": "design-patterns-revisited",
+      "categoryZh": "设计模式再探",
+      "chapter": "command.markdown",
+      "related": ["flyweight", "observer"],
+      "oneLine": "把方法调用封装成对象，从而可排队、记录、撤销与重映射。",
+      "unityIdiom": "Input System 的 Action 触发 Command 对象；输入录制回放 = 命令流；撤销/重做栈；命令对象配合队列做技能连招。",
+      "zhKeywords": ["命令", "输入", "按键", "重映射", "撤销", "重做", "回放", "回调", "请求封装"],
+      "enKeywords": ["input", "replay", "undo", "redo", "callback", "command"]
+    },
+    "flyweight": {
+      "en": "Flyweight",
+      "zh": "享元模式",
+      "category": "design-patterns-revisited",
+      "categoryZh": "设计模式再探",
+      "chapter": "flyweight.markdown",
+      "related": ["prototype", "data-locality", "type-object"],
+      "oneLine": "把大量对象的共享数据外提为单一实例，节省内存。",
+      "unityIdiom": "共享 Mesh/Material 资产；GPU Instancing + MaterialPropertyBlock 只变每实例数据；ScriptableObject 存共享配置；字符串驻留。",
+      "zhKeywords": ["享元", "共享", "内存占用", "大量对象", "相同对象", "树木", "森林", "贴图", "网格", "地形"],
+      "enKeywords": ["memory", "share", "instancing", "mesh", "terrain", "many objects"]
+    },
+    "observer": {
+      "en": "Observer",
+      "zh": "观察者模式",
+      "category": "design-patterns-revisited",
+      "categoryZh": "设计模式再探",
+      "chapter": "observer.markdown",
+      "related": ["event-queue", "singleton"],
+      "oneLine": "对象发布通知、观察者订阅，消除双方的硬耦合。",
+      "unityIdiom": "C# event / UnityEvent；ScriptableObject GameEvent 通道（架构讲座经典做法）；务必在 OnDestroy/OnDisable 退订避免悬空引用。",
+      "zhKeywords": ["观察者", "事件", "通知", "订阅", "解耦", "UI更新", "成就", "发布"],
+      "enKeywords": ["event", "notify", "subscribe", "decouple", "achievement", "ui"]
+    },
+    "prototype": {
+      "en": "Prototype",
+      "zh": "原型模式",
+      "category": "design-patterns-revisited",
+      "categoryZh": "设计模式再探",
+      "chapter": "prototype.markdown",
+      "related": ["command", "flyweight"],
+      "oneLine": "用克隆现有对象代替从头构造，支持运行时动态生成。",
+      "unityIdiom": "Prefab + Instantiate 就是该模式；ScriptableObject 做原型数据；变体 Prefab 实现原型链；克隆后记得重置状态。",
+      "zhKeywords": ["原型", "克隆", "生成器", "怪物", "复制", "预制体", "生成"],
+      "enKeywords": ["clone", "spawn", "prototype", "prefab", "instantiate"]
+    },
+    "singleton": {
+      "en": "Singleton",
+      "zh": "单例模式",
+      "category": "design-patterns-revisited",
+      "categoryZh": "设计模式再探",
+      "chapter": "singleton.markdown",
+      "related": ["service-locator", "subclass-sandbox"],
+      "oneLine": "保证一个类只有一个实例并提供全局访问点（书中的态度是慎用）。",
+      "unityIdiom": "少用 MonoBehaviour 单例；改用 ScriptableObject 单例资产或 DI（Zenject/VContainer）绑定；静态类只做纯函数。",
+      "zhKeywords": ["单例", "全局", "静态", "唯一实例", "全局访问"],
+      "enKeywords": ["singleton", "global", "static", "instance"]
+    },
+    "state": {
+      "en": "State",
+      "zh": "状态模式",
+      "category": "design-patterns-revisited",
+      "categoryZh": "设计模式再探",
+      "chapter": "state.markdown",
+      "related": ["type-object", "subclass-sandbox"],
+      "oneLine": "让对象随内部状态切换行为，消除庞大的条件分支。",
+      "unityIdiom": "Animator 状态机管动画态；游戏逻辑态用手写 FSM（枚举+字典或状态类）；ScriptableObject 状态做数据驱动状态机。",
+      "zhKeywords": ["状态", "状态机", "切换", "枚举", "英雄", "行为切换", "条件分支"],
+      "enKeywords": ["state", "fsm", "transition", "enum", "switch"]
+    },
+    "double-buffer": {
+      "en": "Double Buffer",
+      "zh": "双缓冲",
+      "category": "sequencing-patterns",
+      "categoryZh": "序列模式",
+      "chapter": "double-buffer.markdown",
+      "related": ["game-loop", "dirty-flag"],
+      "oneLine": "在离屏缓冲渲染完整帧后一次性呈现，避免撕裂与状态不一致。",
+      "unityIdiom": "引擎渲染已内建；自定义场景用 RenderTexture ping-pong 或 CommandBuffer；粒子/后处理的双缓冲思想。",
+      "zhKeywords": ["双缓冲", "帧缓冲", "渲染", "撕裂", "画面", "缓冲交换", "前后台"],
+      "enKeywords": ["buffer", "render", "tearing", "frame", "ping-pong"]
+    },
+    "game-loop": {
+      "en": "Game Loop",
+      "zh": "游戏循环",
+      "category": "sequencing-patterns",
+      "categoryZh": "序列模式",
+      "chapter": "game-loop.markdown",
+      "related": ["update-method", "double-buffer"],
+      "oneLine": "以「处理输入→更新→渲染」循环驱动游戏，处理好固定/可变时间步。",
+      "unityIdiom": "Unity 隐藏了循环本体：Update（可变步长）/ FixedUpdate（固定物理步长）/ LateUpdate（跟随相机）；Time.deltaTime / fixedDeltaTime / unscaledDeltaTime。",
+      "zhKeywords": ["游戏循环", "帧率", "时间步", "固定帧", "追帧", "更新循环", "主循环"],
+      "enKeywords": ["loop", "frame", "timestep", "fixed", "delta", "update"]
+    },
+    "update-method": {
+      "en": "Update Method",
+      "zh": "更新方法",
+      "category": "sequencing-patterns",
+      "categoryZh": "序列模式",
+      "chapter": "update-method.markdown",
+      "related": ["component", "game-loop"],
+      "oneLine": "给每个对象一个每帧调用的更新方法，用对象集合模拟游戏循环内的行为。",
+      "unityIdiom": "MonoBehaviour.Update 就是该模式；海量对象用自建 UpdateManager 手动批量更新减少虚调用开销。",
+      "zhKeywords": ["更新方法", "每帧更新", "生命周期", "更新循环", "tick"],
+      "enKeywords": ["update", "tick", "per-frame", "simulate"]
+    },
+    "bytecode": {
+      "en": "Bytecode",
+      "zh": "字节码",
+      "category": "behavioral-patterns",
+      "categoryZh": "行为模式",
+      "chapter": "bytecode.markdown",
+      "related": ["type-object", "subclass-sandbox"],
+      "oneLine": "把行为编码成解释器执行的指令，让行为变成数据、可编辑、可热更。",
+      "unityIdiom": "数据驱动技能/剧情：ScriptableObject + 自建小指令解释器；或直接采用行为树/节点图插件；避免硬编码魔法系统。",
+      "zhKeywords": ["字节码", "解释器", "指令", "数据驱动", "魔法", "技能", "行为编码"],
+      "enKeywords": ["interpreter", "instruction", "data-driven", "spell", "behavior"]
+    },
+    "subclass-sandbox": {
+      "en": "Subclass Sandbox",
+      "zh": "子类沙盒",
+      "category": "behavioral-patterns",
+      "categoryZh": "行为模式",
+      "chapter": "subclass-sandbox.markdown",
+      "related": ["type-object", "singleton"],
+      "oneLine": "基类提供受保护的操作集，子类在这个受限环境中实现自身行为。",
+      "unityIdiom": "自定义 MonoBehaviour 基类提供 protected 辅助方法（如 GetCachedComponent、PlaySound）；警惕基类膨胀与「上帝基类」。",
+      "zhKeywords": ["子类沙盒", "基类", "模板方法", "保护方法", "继承", "沙盒"],
+      "enKeywords": ["base class", "template method", "protected", "inheritance"]
+    },
+    "type-object": {
+      "en": "Type Object",
+      "zh": "类型对象",
+      "category": "behavioral-patterns",
+      "categoryZh": "行为模式",
+      "chapter": "type-object.markdown",
+      "related": ["component", "prototype"],
+      "oneLine": "用数据对象表示「类型」，避免为每一种类型写一个类。",
+      "unityIdiom": "ScriptableObject 定义怪物种类/武器类型/配方等数据；替代「每种敌人一个 C# 子类」的继承爆炸。",
+      "zhKeywords": ["类型对象", "类型数据", "数据驱动", "种类", "种族", "职业"],
+      "enKeywords": ["type", "data-driven", "kind", "breed", "class"]
+    },
+    "component": {
+      "en": "Component",
+      "zh": "组件模式",
+      "category": "decoupling-patterns",
+      "categoryZh": "解耦模式",
+      "chapter": "component.markdown",
+      "related": ["observer", "type-object"],
+      "oneLine": "一个实体聚合多个组件、各管一域，替代深层继承链。",
+      "unityIdiom": "GameObject + Component 就是该模式；优先组合而非继承；跨组件通信优先事件或接口，GetComponent 结果记得缓存。",
+      "zhKeywords": ["组件", "实体", "组合", "继承链", "GameObject", "聚合"],
+      "enKeywords": ["component", "entity", "composition", "inheritance"]
+    },
+    "event-queue": {
+      "en": "Event Queue",
+      "zh": "事件队列",
+      "category": "decoupling-patterns",
+      "categoryZh": "解耦模式",
+      "chapter": "event-queue.markdown",
+      "related": ["observer", "service-locator"],
+      "oneLine": "用队列缓冲并延迟分发事件，解耦发送方与接收方、平摊尖峰。",
+      "unityIdiom": "主线程安全队列（ConcurrentQueue/Channel）+ Update/协程泵；后台线程结果回调主线程；音频指令排队。",
+      "zhKeywords": ["事件队列", "消息队列", "延迟", "音频", "主线程", "通信", "缓冲"],
+      "enKeywords": ["queue", "message", "audio", "thread", "defer", "bus"]
+    },
+    "service-locator": {
+      "en": "Service Locator",
+      "zh": "服务定位器",
+      "category": "decoupling-patterns",
+      "categoryZh": "解耦模式",
+      "chapter": "service-locator.markdown",
+      "related": ["singleton", "component"],
+      "oneLine": "全局注册表按需提供服务，解耦使用者与具体实现（以可控耦合换取便利）。",
+      "unityIdiom": "静态服务注册表；现代项目优先 DI 容器（Zenject/VContainer）显式注入；仅对音频/日志等横切服务保留定位器。",
+      "zhKeywords": ["服务定位", "全局服务", "查找", "注册表", "音频服务", "依赖查找"],
+      "enKeywords": ["service", "locator", "registry", "lookup", "di", "audio"]
+    },
+    "data-locality": {
+      "en": "Data Locality",
+      "zh": "数据局部性",
+      "category": "optimization-patterns",
+      "categoryZh": "优化模式",
+      "chapter": "data-locality.markdown",
+      "related": ["component", "flyweight", "object-pool"],
+      "oneLine": "按访问顺序组织内存布局，充分利用 CPU 缓存行。",
+      "unityIdiom": "DOTS/ECS + NativeArray + Burst/Job System；热数据用紧凑 struct 数组（SoA）；避免每帧分配与引用跳跃。",
+      "zhKeywords": ["数据局部性", "缓存", "内存布局", "SoA", "AoS", "连续内存", "ECS", "缓存行", "cpu缓存"],
+      "enKeywords": ["cache", "memory layout", "soa", "aos", "ecs", "contiguous", "cpu"]
+    },
+    "dirty-flag": {
+      "en": "Dirty Flag",
+      "zh": "脏标记",
+      "category": "optimization-patterns",
+      "categoryZh": "优化模式",
+      "chapter": "dirty-flag.markdown",
+      "related": ["observer", "data-locality"],
+      "oneLine": "改动时只置脏标记，需要时才重算，避免重复昂贵计算。",
+      "unityIdiom": "UI Canvas 重建即脏标记思想；Transform 层级脏传播；自建「世界矩阵/寻路图缓存」时用脏标记延迟重算。",
+      "zhKeywords": ["脏标记", "缓存失效", "重算", "变换", "重建", "延迟计算"],
+      "enKeywords": ["dirty", "cache", "invalidate", "recompute", "transform"]
+    },
+    "object-pool": {
+      "en": "Object Pool",
+      "zh": "对象池",
+      "category": "optimization-patterns",
+      "categoryZh": "优化模式",
+      "chapter": "object-pool.markdown",
+      "related": ["flyweight", "data-locality"],
+      "oneLine": "复用对象避免频繁分配与释放，消除 GC/分配开销。",
+      "unityIdiom": "预实例化池（UnityEngine.Pool / 自写池组件）；子弹/特效/敌人复用；归还时重置状态；粒子用引擎内置池。",
+      "zhKeywords": ["对象池", "池化", "复用", "子弹", "粒子", "分配", "GC", "频繁创建", "销毁"],
+      "enKeywords": ["pool", "reuse", "allocation", "gc", "bullet", "particle", "spawn"]
+    },
+    "spatial-partition": {
+      "en": "Spatial Partition",
+      "zh": "空间分区",
+      "category": "optimization-patterns",
+      "categoryZh": "优化模式",
+      "chapter": "spatial-partition.markdown",
+      "related": ["object-pool", "dirty-flag"],
+      "oneLine": "按空间位置分区存储对象，让「附近有什么」的查询变快。",
+      "unityIdiom": "Physics 查询（OverlapSphere/Raycast）内置空间结构；非物理用途自建 Grid/四叉树；RTS 单位查找、邻近广播。",
+      "zhKeywords": ["空间分区", "空间查询", "网格", "四叉树", "碰撞检测", "邻近", "八叉树"],
+      "enKeywords": ["spatial", "grid", "quadtree", "octree", "collision", "nearby"]
+    }
+  },
+  "chapters": {
+    "introduction.markdown": {
+      "en": "Introduction",
+      "zh": "引言",
+      "category": null,
+      "categoryZh": null,
+      "zhKeywords": ["架构", "解耦", "模式", "设计模式", "抽象"],
+      "enKeywords": ["architecture", "decouple", "design patterns"]
+    },
+    "architecture-performance-and-games.markdown": {
+      "en": "Architecture, Performance, and Games",
+      "zh": "架构、性能与游戏",
+      "category": null,
+      "categoryZh": null,
+      "zhKeywords": ["性能预算", "代码架构", "简单性", "优化", "缓存"],
+      "enKeywords": ["performance", "architecture", "optimization", "simplicity"]
+    },
+    "design-patterns-revisited.markdown": {
+      "en": "Design Patterns Revisited",
+      "zh": "设计模式再探",
+      "category": "design-patterns-revisited",
+      "categoryZh": "设计模式再探",
+      "zhKeywords": ["设计模式", "GoF", "面向对象"],
+      "enKeywords": ["design patterns", "gof", "oop"]
+    },
+    "sequencing-patterns.markdown": {
+      "en": "Sequencing Patterns",
+      "zh": "序列模式",
+      "category": "sequencing-patterns",
+      "categoryZh": "序列模式",
+      "zhKeywords": ["序列", "循环", "帧", "更新"],
+      "enKeywords": ["sequencing", "loop", "frame"]
+    },
+    "behavioral-patterns.markdown": {
+      "en": "Behavioral Patterns",
+      "zh": "行为模式",
+      "category": "behavioral-patterns",
+      "categoryZh": "行为模式",
+      "zhKeywords": ["行为", "数据驱动", "类型"],
+      "enKeywords": ["behavioral", "data-driven"]
+    },
+    "decoupling-patterns.markdown": {
+      "en": "Decoupling Patterns",
+      "zh": "解耦模式",
+      "category": "decoupling-patterns",
+      "categoryZh": "解耦模式",
+      "zhKeywords": ["解耦", "耦合", "通信", "组件"],
+      "enKeywords": ["decoupling", "coupling", "communication"]
+    },
+    "optimization-patterns.markdown": {
+      "en": "Optimization Patterns",
+      "zh": "优化模式",
+      "category": "optimization-patterns",
+      "categoryZh": "优化模式",
+      "zhKeywords": ["优化", "性能", "内存", "缓存", "空间"],
+      "enKeywords": ["optimization", "performance", "memory"]
+    }
+  }
+}

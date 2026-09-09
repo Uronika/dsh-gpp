@@ -1,0 +1,11 @@
+# 原书仓库（由使用者本地自行克隆，不进入版本库）
+book/
+
+# 构建产物（含逐字正文 chunk + 向量，不进入版本库）
+index.json
+gpp-data/
+
+# 依赖与临时文件
+node_modules/
+*.log
+*.partial-*
